@@ -17,9 +17,10 @@
             <div class="mb-4 rounded-lg bg-green-100 p-4 text-sm text-green-700" role="alert">
                 {{ session('message') }}
             </div>
+            
         @endif
         <div class="bg-white rounded-xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
+            <div class="bg-linear-to-r from-indigo-500 to-purple-600 p-6">
                 <h2 class="text-4xl font-bold text-white flex items-center justify-between">
                     Zadania
                     <div class="flex space-x-4">
@@ -77,7 +78,7 @@
                                     
                                     @if (!$task->completed_at)
                                         <a href="{{ route('todo.show', $task->id) }}" class="inline-block px-3 py-1 rounded-md text-xs font-medium transition bg-blue-500 text-white hover:bg-blue-600">
-                                            View
+                                            Read
                                         </a>
                                     
                                         <form action="{{ route('todo.softDelete', $task->id) }}" method="POST" class="inline-block">
@@ -107,7 +108,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                                         </svg>
                                         <p class="text-lg font-medium">Brak zadań</p>
-                                        <p class="text-sm text-gray-400">Kliknij „+ Dodaj zadanie”, by zacząć!</p>
+                                        <p class="text-sm text-gray-400">Kliknij „Dodaj zadanie”, by zacząć!</p>
                                     </div>
                                 </td>
                             </tr>

@@ -8,11 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Todo extends Model
 {
-    use HasFactory, SoftDeletes; // <-- DODAJ SoftDeletes
+    use HasFactory, SoftDeletes;
 
-    /**
-     * Pola, które można masowo wypełniać.
-     */
     protected $fillable = [
         'nazwa_zadania',
         'tresc_zadania',

@@ -13,11 +13,14 @@ return new class extends Migration
             $table->string('nazwa_zadania');
             $table->text('tresc_zadania')->nullable();
             $table->date('deadline')->nullable();
-            $table->timestamp('completed_at')->nullable(); // Tworzy completed_at
-            $table->timestamps(); // Tworzy created_at i updated_at
-            $table->softDeletes(); // KLUCZOWE DLA "SOFT DELETE"
+            $table->timestamp('completed_at')->nullable();
+            $table->timestamps(); // Dla created_at i updated_at
+            $table->softDeletes();
         });
     }
+
+    // php artisan migrate
+    // php artisan migrate:fresh 
 
     public function down(): void
     {

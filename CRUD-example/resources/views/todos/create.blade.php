@@ -12,7 +12,7 @@
 
     <main class="max-w-2xl mx-auto my-12 px-4">
         <div class="bg-white rounded-xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
+            <div class="bg-linear-to-r from-indigo-500 to-purple-600 p-6">
                 <h2 class="text-4xl font-bold text-white">
                     Nowe zadanie
                 </h2>
