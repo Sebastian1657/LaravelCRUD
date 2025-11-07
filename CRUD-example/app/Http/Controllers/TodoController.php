@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use App\Models\Kategoria;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -25,7 +26,12 @@ class TodoController extends Controller
 
     public function create()
     {
-        return view('todos.create');
+
+    $categories = Kategoria::all();
+
+    // Przekaż je do widoku
+    return view('todos.create', ['categories' => $categories]);
+        
     }
 
     public function store(Request $request)
@@ -35,6 +41,7 @@ class TodoController extends Controller
             'nazwa_zadania' => 'required|string|max:255',
             'tresc_zadania' => 'nullable|string',
             'deadline' => 'nullable|date',
+            'category_id' => 'exists:categories,id'
         ]);
 
         // Stworzenie nowego rekordu w bazie
@@ -57,9 +64,13 @@ class TodoController extends Controller
     {
         // Znajdź zadanie, które chcemy edytować
         $task = Todo::findOrFail($id);
+        $categories = Kategoria::all(); 
         
         // Zwróć nowy widok z zadaniem
-        return view('todos.edit', ['task' => $task]);
+        return view('todos.edit', [
+        'task' => $task,
+        'categories' => $categories // <-- Przekaż kategorie
+    ]);
     }
 
     public function update(Request $request, string $id)
@@ -70,6 +81,7 @@ class TodoController extends Controller
             'nazwa_zadania' => 'required|string|max:255',
             'tresc_zadania' => 'nullable|string',
             'deadline' => 'nullable|date',
+            'category_id'=> 'exists:categories,id'
         ]);
 
         $task->update($validated);

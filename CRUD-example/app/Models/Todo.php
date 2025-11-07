@@ -13,9 +13,14 @@ class Todo extends Model
     protected $fillable = [
         'nazwa_zadania',
         'tresc_zadania',
+        'kategoria_id',
         'deadline',
     ];
     protected $casts = [
         'completed_at' => 'datetime',
     ];
+    public function category()
+    {
+        return $this->belongsTo(Kategoria::class);
+    }
 }

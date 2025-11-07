@@ -16,6 +16,9 @@
                 <h2 class="text-4xl font-bold text-white">
                     {{ $task->nazwa_zadania }}
                 </h2>
+                <h2 class="text-4xl font-bold text-white">
+                    {{ $task->kategoria }}
+                </h2>
                 @if ($task->deadline)
                     <p class="text-indigo-100 mt-2">Deadline: {{ $task->deadline }}</p>
                 @endif

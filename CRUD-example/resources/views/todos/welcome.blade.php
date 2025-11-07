@@ -43,6 +43,7 @@
                             <th class="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-wider"></th>
                             <th class="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-wider">ID</th>
                             <th class="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-wider">Nazwa zadania</th>
+                            <th class="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-wider">Kategoria</th>
                             <th class="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-wider">Deadline</th>
                             <th class="px-6 py-4 text-xs font-bold text-gray-600 uppercase tracking-wider text-center">Akcje</th>
                         </tr>
@@ -71,6 +72,14 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm {{ $task->completed_at ? 'text-gray-500' : 'text-gray-700' }}">
                                     {{ $task->nazwa_zadania }}
                                 </td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    {{-- 
+      Używamy relacji, którą zdefiniowaliśmy w modelu.
+      Pytajnik '?->' (Null Safe Operator) zabezpiecza nas, 
+      jeśli zadanie nie ma kategorii (jest NULL).
+    --}}
+    {{ $task->category?->name }}
+</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $task->deadline }}
                                 </td>
