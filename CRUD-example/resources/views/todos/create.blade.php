@@ -17,6 +17,16 @@
                     Nowe zadanie
                 </h2>
             </div>
+            @if ($errors->any())
+                <div class="mb-4 rounded-lg bg-red-100 p-4 text-sm text-red-700" role="alert">
+                    <strong class="font-bold">Coś poszło nie tak!</strong>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <form action="{{ route('todo.store') }}" method="POST" class="p-8 space-y-6">
                 @csrf <div>
@@ -50,6 +60,56 @@
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div>
+                    <label for="categories_id" class="block text-sm font-medium text-gray-700 mb-1">
+                        Kategoria
+                    </label>
+                    <select 
+                        name="categories_id" 
+                        id="categories_id"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    >
+                        <option value="">-- Wybierz kategorię --</option>
+
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->kategoria }}</option>
+                        @endforeach
+
+                    </select>
+                    @error('categories_id')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Przypisz użytkowników (opcjonalnie):
+                    </label>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        @foreach ($users as $user)
+                            <div>
+                                <input 
+                                    type="checkbox" 
+                                    name="users[]" 
+                                    value="{{ $user->id }}" 
+                                    id="user_{{ $user->id }}" 
+                                    class="peer hidden"
+                                >
+                                <label 
+                                    for="user_{{ $user->id }}" 
+                                    class="cursor-pointer rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-700 transition-colors
+                                           peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white
+                                           hover:bg-gray-50"
+                                >
+                                    {{ $user->nick }}
+                                </label>
+                            <br>
+                            <br>
+                            </div>
+                        @endforeach
+                    </div>
 
                 <div>
                     <label for="deadline" class="block text-sm font-medium text-gray-700 mb-1">

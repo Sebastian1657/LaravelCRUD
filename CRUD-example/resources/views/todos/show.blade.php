@@ -16,6 +16,9 @@
                 <h2 class="text-4xl font-bold text-white">
                     {{ $task->nazwa_zadania }}
                 </h2>
+                <h2 class="text-4xl font-bold text-white">
+                    {{ $task->kategoria }}
+                </h2>
                 @if ($task->deadline)
                     <p class="text-indigo-100 mt-2">Deadline: {{ $task->deadline }}</p>
                 @endif
@@ -27,6 +30,19 @@
                     <div class="p-4 bg-gray-50 rounded-lg text-gray-700 whitespace-pre-wrap">
                         {{ $task->tresc_zadania ?? 'Brak opisu.' }}
                     </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Przypisani użytkownicy:</h3>
+                    <div class="flex flex-wrap gap-2">
+                    @forelse ($task->users as $user)
+                        <span class="rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800">
+                            {{ $user->nick }}
+                        </span>
+                    @empty
+                        <p class="text-sm text-gray-500">Brak przypisanych użytkowników. Musisz poradzić sobie sam :)</p>
+                    @endforelse
+                </div>
                 </div>
 
                 <div class="text-sm text-gray-500 border-t border-gray-200 pt-4">
