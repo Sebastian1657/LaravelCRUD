@@ -9,8 +9,6 @@ class Kategoria extends Model
 {
     use HasFactory;
     protected $table = 'categories';
-
-    // Pozwól na masowe dodawanie nazw  y
     protected $fillable = ['name'];
 
     /**
@@ -18,6 +16,6 @@ class Kategoria extends Model
      */
     public function todos()
     {
-        return $this->hasMany(Todo::class);
+        return $this->hasMany(Todos::class);
     }
 }

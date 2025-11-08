@@ -32,6 +32,19 @@
                     </div>
                 </div>
 
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Przypisani użytkownicy:</h3>
+                    <div class="flex flex-wrap gap-2">
+                    @forelse ($task->users as $user)
+                        <span class="rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800">
+                            {{ $user->nick }}
+                        </span>
+                    @empty
+                        <p class="text-sm text-gray-500">Brak przypisanych użytkowników. Musisz poradzić sobie sam :)</p>
+                    @endforelse
+                </div>
+                </div>
+
                 <div class="text-sm text-gray-500 border-t border-gray-200 pt-4">
                     <p>Utworzono: {{ $task->created_at->format('d.m.Y H:i') }}</p>
                     <p>Ostatnia edycja: {{ $task->updated_at->format('d.m.Y H:i') }}</p>

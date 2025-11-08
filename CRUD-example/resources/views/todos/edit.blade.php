@@ -35,27 +35,26 @@
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
-<div>
-    <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">
-        Kategoria (opcjonalnie)
-    </label>
-    <select 
-        name="category_id" 
-        id="category_id"
-        class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-    >
-        <option value="">-- Wybierz kategorię --</option>
+                <div>
+                    <label for="categories_id" class="block text-sm font-medium text-gray-700 mb-1">
+                        Kategoria
+                    </label>
+                    <select 
+                        name="categories_id" 
+                        id="categories_id"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    >
+                        <option value="">-- Wybierz kategorię --</option>
 
-        @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-        @endforeach
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->kategoria }}</option>
+                        @endforeach
 
-    </select>
-    @error('category_id')
-        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-    @enderror
-</div>
-
+                    </select>
+                    @error('categories_id')
+                        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
                 <div>
                     <label for="tresc_zadania" class="block text-sm font-medium text-gray-700 mb-1">
                         Treść zadania (opcjonalnie)
@@ -70,7 +69,47 @@
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
-
+                <div>
+    <label class="block text-sm font-medium text-gray-700 mb-2">
+        Przypisz użytkowników:
+    </label>
+    
+    <div class="flex flex-wrap gap-2">
+        
+        {{-- Pętla po wszystkich użytkownikach dostępnych w systemie --}}
+        @foreach ($all_users as $user)
+            <div>
+                {{-- 
+                  TO JEST UKRYTY CHECKBOX:
+                  - Nazywa się 'users[]', co wyśle tablicę ID do kontrolera.
+                  - Jest "peer", co pozwala Tailwindowi na stylowanie etykiety (<label>).
+                  - Sprawdzamy, czy ID usera jest w tablicy $assigned_user_ids.
+                --}}
+                <input 
+                    type="checkbox" 
+                    name="users[]" 
+                    value="{{ $user->id }}" 
+                    id="user_{{ $user->id }}" 
+                    class="peer hidden"
+                    @if(in_array($user->id, $assigned_users)) checked @endif
+                >
+                <label 
+                    for="user_{{ $user->id }}" 
+                    class="cursor-pointer rounded-full border border-gray-300 bg-white px-3 py-1 text-sm text-gray-700 transition-colors
+                           peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white
+                           hover:bg-gray-50"
+                >
+                    {{ $user->nick }}
+                </label>
+            </div>
+        @endforeach
+        
+    </div>
+    {{-- Wyświetlanie błędu, jeśli coś pójdzie nie tak --}}
+    @error('users.*')
+        <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+    @enderror
+</div>
                 <div>
                     <label for="deadline" class="block text-sm font-medium text-gray-700 mb-1">
                         Deadline (opcjonalnie)

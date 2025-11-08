@@ -6,21 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Todo extends Model
+class Todos extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'nazwa_zadania',
+        'categories_id',
         'tresc_zadania',
-        'kategoria_id',
-        'deadline',
+        'deadline'
     ];
     protected $casts = [
         'completed_at' => 'datetime',
     ];
-    public function category()
+    public function categories()
     {
         return $this->belongsTo(Kategoria::class);
+    }
+    public function users(){
+        return $this->belongsToMany(Users::class);
     }
 }
